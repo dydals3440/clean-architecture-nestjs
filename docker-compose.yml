@@ -1,0 +1,10 @@
+services:
+  mongodb:
+    image: mongo:latest
+    ports:
+      - 54173:27017
+    volumes:
+      - ./mongodb/data:/data/db
+
+volumes:
+  mongodb_data:
