@@ -2,9 +2,21 @@ services:
   mongodb:
     image: mongo:latest
     ports:
-      - 54173:27017
+      - '54173:27017'
     volumes:
-      - ./mongodb/data:/data/db
+      - mongodb_data:/data/db
+
+  postgres:
+    image: postgres:latest
+    ports:
+      - '54172:5432'
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: clean_architecture
+    volumes:
+      - postgres_data:/var/lib/postgresql
 
 volumes:
   mongodb_data:
+  postgres_data:
