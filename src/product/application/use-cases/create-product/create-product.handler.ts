@@ -6,13 +6,16 @@ import { Product } from '../../../domain/entities/product.entity';
 import { Inject } from '@nestjs/common';
 
 @CommandHandler(CreateProductCommand)
-export class CreateProductHandler implements ICommandHandler<CreateProductCommand> {
+export class CreateProductHandler implements ICommandHandler<
+  CreateProductCommand,
+  Product
+> {
   constructor(
     @Inject(PRODUCT_REPOSITORY)
     private readonly productRepository: ProductRepository,
   ) {}
 
-  async execute(command: CreateProductCommand): Promise<void> {
+  async execute(command: CreateProductCommand): Promise<Product> {
     const product = Product.create(
       command.name,
       command.description,
@@ -23,5 +26,7 @@ export class CreateProductHandler implements ICommandHandler<CreateProductComman
     );
 
     await this.productRepository.save(product);
+
+    return product;
   }
 }

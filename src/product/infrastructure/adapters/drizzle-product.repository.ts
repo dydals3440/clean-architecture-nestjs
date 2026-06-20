@@ -26,7 +26,7 @@ export class DrizzleProductRepository implements ProductRepository {
       .insert(products)
       .values(row)
       .onConflictDoUpdate({
-        target: [products.id],
+        target: products.id,
         set: {
           name: row.name,
           description: row.description,

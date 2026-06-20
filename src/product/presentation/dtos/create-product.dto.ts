@@ -35,7 +35,7 @@ export class CreateProductDto {
   @IsOptional()
   currency?: string = 'USD';
 
-  @IsString()
+  @IsNumber()
   @Min(0)
   stock: number;
 }
